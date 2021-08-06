@@ -18,11 +18,13 @@ import logo from '../../assets/logo.svg';
 import restaurantSample from '../../assets/restaurante-fake.png';
 import {
   Card,
-  RestaurantCard
+  RestaurantCard,
+  Modal
 } from '../../components';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
+  const [modalOpened, setModalOpened] = useState(false);
 
   const carouselSettings = {
     dots: false,
@@ -66,6 +68,10 @@ const Home = () => {
         </Search>
       </Container>
       <Map />
+      <Modal
+        open={modalOpened}
+        onClose={() => setModalOpened(false)}
+      />
     </Wrapper>
   );
 }
