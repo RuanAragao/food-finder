@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+// Slick Carousel
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -32,4 +36,13 @@ export const Map = styled.div`
   display: flex;
   width: 500px;
   background-color: red;
+`;
+
+export const CarouselTitle = styled.h1`
+  font-family: ${(props) => props.theme.fonts.regular};
+  color: ${(props) => props.theme.colors.text};
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29px;
+  margin: 16px 0;
 `;

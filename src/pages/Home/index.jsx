@@ -5,7 +5,8 @@ import {
   Search,
   Logo,
   Wrapper,
-  Map
+  Map,
+  CarouselTitle
 } from './styles';
 
 import TextField, { Input } from '@material/react-text-field';
@@ -31,6 +32,7 @@ const Home = () => {
               onChange={(event) => setInputValue(event.value)}
             />
           </TextField>
+          <CarouselTitle>Na sua Área</CarouselTitle>
         </Search>
       </Container>
       <Map />
