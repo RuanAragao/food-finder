@@ -3,6 +3,7 @@ import styled from 'styled-components';
 // Slick Carousel
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Slider from 'react-slick';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -36,6 +37,12 @@ export const Map = styled.div`
   display: flex;
   width: 500px;
   background-color: red;
+`;
+
+export const Carousel = styled(Slider)`
+  .slick-slide {
+    margin-right: 16px;
+  }
 `;
 
 export const CarouselTitle = styled.h1`
