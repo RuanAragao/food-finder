@@ -5,7 +5,6 @@ import {
   Search,
   Logo,
   Wrapper,
-  Map,
   Carousel,
   CarouselTitle
 } from './styles';
@@ -19,7 +18,8 @@ import restaurantSample from '../../assets/restaurante-fake.png';
 import {
   Card,
   RestaurantCard,
-  Modal
+  Modal,
+  Map
 } from '../../components';
 
 const Home = () => {
