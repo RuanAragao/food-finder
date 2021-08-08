@@ -42,8 +42,6 @@ const Home = () => {
   function handleKeyPress(event) {
     if (event.code === 'Enter') {
       setQuery(inputValue);
-      console.log("inputValue: ", inputValue);
-      console.log("query: ", query);
     }
   }
 
