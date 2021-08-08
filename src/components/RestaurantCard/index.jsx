@@ -1,7 +1,7 @@
 
 import ReactStars from 'react-rating-stars-component';
 
-import photoSample from '../../assets/restaurante-fake.png';
+import photo_default from '../../assets/restaurante-fake.png';
 import {
   Restaurant,
   RestaurantInfo,
@@ -10,22 +10,22 @@ import {
   RestaurantThumb
 } from './style';
 
-const RestaurantCard = () => {
+const RestaurantCard = ({ restaurant }) => {
   return (
     <Restaurant>
       <RestaurantInfo>
-        <RestaurantTitle>La K'sa de Macarena</RestaurantTitle>
+        <RestaurantTitle>{restaurant.name}</RestaurantTitle>
         <ReactStars
           count={5}
           activeColor="#e7711c"
           edit={false}
-          value={4}
+          value={restaurant.rating}
           classNames="rating-stars"
           isHalf
         />
-        <RestaurantAddress>Av. Santo Antônio, 142</RestaurantAddress>
+        <RestaurantAddress>{restaurant.vicinity || restaurant.formatted_address}</RestaurantAddress>
       </RestaurantInfo>
-      <RestaurantThumb src={photoSample} alt="Restaurante Sample" />
+      <RestaurantThumb src={restaurant.photos ? restaurant.photos[0].getUrl() : photo_default} alt={restaurant.name} />
     </Restaurant>
   )
 };
