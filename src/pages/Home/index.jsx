@@ -24,6 +24,7 @@ import {
 
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
+  const [query, setQuery] = useState(null);
   const [modalOpened, setModalOpened] = useState(false);
 
   const carouselSettings = {
@@ -38,6 +39,14 @@ const Home = () => {
     lazyLoad: false,
   };
 
+  function handleKeyPress(event) {
+    if (event.code === 'Enter') {
+      setQuery(inputValue);
+      console.log("inputValue: ", inputValue);
+      console.log("query: ", query);
+    }
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -50,7 +59,8 @@ const Home = () => {
           >
             <Input
               value={inputValue}
-              onChange={(event) => setInputValue(event.value)}
+              onKeyPress={handleKeyPress}
+              onChange={(event) => setInputValue(event.currentTarget.value)}
             />
           </TextField>
           <CarouselTitle>Na sua Área</CarouselTitle>
@@ -67,7 +77,7 @@ const Home = () => {
           <RestaurantCard />
         </Search>
       </Container>
-      <Map />
+      <Map query={query} />
       <Modal
         open={modalOpened}
         onClose={() => setModalOpened(false)}
