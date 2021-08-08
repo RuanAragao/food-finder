@@ -15,7 +15,7 @@ import MaterialIcon from '@material/react-material-icon';
 // import Slider from 'react-slick';
 
 import logo from '../../assets/logo.svg';
-import restaurantSample from '../../assets/restaurante-fake.png';
+import photo_default from '../../assets/restaurante-fake.png';
 import {
   Card,
   RestaurantCard,
@@ -65,17 +65,14 @@ const Home = () => {
           </TextField>
           <CarouselTitle>Na sua Área</CarouselTitle>
           <Carousel {...carouselSettings}>
-            <Card photo={restaurantSample} title="Rest'urent Fulifood" />
-            <Card photo={restaurantSample} title="Rest'urent Fulifood" />
-            <Card photo={restaurantSample} title="Rest'urent Fulifood" />
-            <Card photo={restaurantSample} title="Rest'urent Fulifood" />
-            <Card photo={restaurantSample} title="Rest'urent Fulifood" />
-            <Card photo={restaurantSample} title="Rest'urent Fulifood" />
-            <Card photo={restaurantSample} title="Rest'urent Fulifood" />
-            <Card photo={restaurantSample} title="Rest'urent Fulifood" />
+            {restaurants.map((restaurant) => (
+              <Card
+                photo={restaurant.photos ? restaurant.photos[0].getUrl() : photo_default}
+                title={restaurant.name}
+              />
+            ))}
           </Carousel>
           {restaurants.map((restaurant) => <RestaurantCard restaurant={restaurant} />)}
-          {/* <RestaurantCard /> */}
         </Search>
       </Container>
       <Map query={query} />
