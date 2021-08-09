@@ -10,9 +10,9 @@ import {
   RestaurantThumb
 } from './style';
 
-const RestaurantCard = ({ restaurant }) => {
+const RestaurantCard = ({ restaurant, onClick }) => {
   return (
-    <Restaurant>
+    <Restaurant onClick={onClick}>
       <RestaurantInfo>
         <RestaurantTitle>{restaurant.name}</RestaurantTitle>
         <ReactStars

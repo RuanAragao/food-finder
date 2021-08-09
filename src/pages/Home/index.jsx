@@ -7,7 +7,10 @@ import {
   Logo,
   Wrapper,
   Carousel,
-  CarouselTitle
+  CarouselTitle,
+  ModalTitle,
+  ModalContent,
+  ModalAddress
 } from './styles';
 
 import TextField, { Input } from '@material/react-text-field';
@@ -26,8 +29,9 @@ import {
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
   const [query, setQuery] = useState(null);
+  const [placeId, setPlaceId] = useState(null);
   const [modalOpened, setModalOpened] = useState(false);
-  const { restaurants } = useSelector((state) => state.restaurants);
+  const { restaurants, restaurantSelected } = useSelector((state) => state.restaurants);
 
   const carouselSettings = {
     dots: false,
@@ -38,13 +42,18 @@ const Home = () => {
     adaptativeHeight: true,
     autoplay: true,
     autoplaySpeed: 3000,
-    lazyLoad: false,
+    lazyLoad: true,
   };
 
   function handleKeyPress(event) {
     if (event.code === 'Enter') {
       setQuery(inputValue);
     }
+  }
+
+  function handleOpenModal(placeId) {
+    setPlaceId(placeId);
+    setModalOpened(true);
   }
 
   return (
@@ -69,17 +78,32 @@ const Home = () => {
               <Card
                 photo={restaurant.photos ? restaurant.photos[0].getUrl() : photo_default}
                 title={restaurant.name}
+                key={`restaurant-carousel-${restaurant.place_id}`}
               />
             ))}
           </Carousel>
-          {restaurants.map((restaurant) => <RestaurantCard restaurant={restaurant} />)}
+          {restaurants.map((restaurant) => (
+            <RestaurantCard
+              onClick={() => handleOpenModal(restaurant.place_id)}
+              restaurant={restaurant}
+              key={`restaurant-card-${restaurant.place_id}`}
+            />
+          ))}
         </Search>
       </Container>
-      <Map query={query} />
+      <Map
+        query={query}
+        placeId={placeId}
+      />
       <Modal
         open={modalOpened}
         onClose={() => setModalOpened(false)}
-      />
+      >
+        <ModalTitle>{restaurantSelected?.name}</ModalTitle>
+        <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
+        <ModalAddress>{restaurantSelected?.formatted_address}</ModalAddress>
+        <ModalContent>{restaurantSelected?.opening_hours?.isOpen() ? 'Aberto agora :-)' : 'Fechado no momento :-('}</ModalContent>
+      </Modal>
     </Wrapper>
   );
 }
