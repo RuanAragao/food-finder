@@ -23,7 +23,8 @@ import {
   Card,
   RestaurantCard,
   Modal,
-  Map
+  Map,
+  Loader
 } from '../../components';
 
 const Home = () => {
@@ -72,16 +73,22 @@ const Home = () => {
               onChange={(event) => setInputValue(event.currentTarget.value)}
             />
           </TextField>
-          <CarouselTitle>Na sua Área</CarouselTitle>
-          <Carousel {...carouselSettings}>
-            {restaurants.map((restaurant) => (
-              <Card
-                photo={restaurant.photos ? restaurant.photos[0].getUrl() : photo_default}
-                title={restaurant.name}
-                key={`restaurant-carousel-${restaurant.place_id}`}
-              />
-            ))}
-          </Carousel>
+          {restaurants.length > 0 ? (
+            <>
+              <CarouselTitle>Na sua Área</CarouselTitle>
+              <Carousel {...carouselSettings}>
+                {restaurants.map((restaurant) => (
+                  <Card
+                    photo={restaurant.photos ? restaurant.photos[0].getUrl() : photo_default}
+                    title={restaurant.name}
+                    key={`restaurant-carousel-${restaurant.place_id}`}
+                  />
+                ))}
+              </Carousel>
+            </>
+          ) : (
+            <Loader />
+          )}
           {restaurants.map((restaurant) => (
             <RestaurantCard
               onClick={() => handleOpenModal(restaurant.place_id)}
