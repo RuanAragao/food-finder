@@ -24,7 +24,8 @@ import {
   RestaurantCard,
   Modal,
   Map,
-  Loader
+  Loader,
+  Skeleton
 } from '../../components';
 
 const Home = () => {
@@ -104,12 +105,27 @@ const Home = () => {
       />
       <Modal
         open={modalOpened}
-        onClose={() => setModalOpened(false)}
-      >
-        <ModalTitle>{restaurantSelected?.name}</ModalTitle>
-        <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
-        <ModalAddress>{restaurantSelected?.formatted_address}</ModalAddress>
-        <ModalContent>{restaurantSelected?.opening_hours?.isOpen() ? 'Aberto agora :-)' : 'Fechado no momento :-('}</ModalContent>
+        onClose={() => setModalOpened(false)}>
+        {restaurantSelected ? (
+          <>
+            <ModalTitle>{restaurantSelected?.name}</ModalTitle>
+            <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
+            <ModalAddress>{restaurantSelected?.formatted_address}</ModalAddress>
+            <ModalContent>
+              {restaurantSelected?.opening_hours?.isOpen()
+                ? 'Aberto agora :-)'
+                : 'Fechado no momento :-('
+              }
+            </ModalContent>
+          </>
+        ) : (
+          <>
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+          </>
+        )}
       </Modal>
     </Wrapper>
   );
